@@ -6,8 +6,10 @@ import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 
+import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -260,11 +262,16 @@ public class ProducerTest {
 
 			Properties props = new Properties();
 			props.put("bootstrap.servers", bootstrapSeverStr);
-			props.put("retries", Integer.valueOf(0));
+			//props.put("retries", Integer.valueOf(0));
 			props.put("linger.ms", Integer.valueOf(0));
 			props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 			props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 			props.put("partitioner.class", "com.jieshun.test.MyPartition");
+			props.put("acks", "1");
+			props.put("retries", "3");
+			props.put("timeout.ms", "10000");
+			props.put("retry.backoff.ms", "100");
+			
 			producer = new KafkaProducer<String, String>(props);
 			if (isTopic) {
 				sendData(topic, content, 1);
@@ -362,8 +369,10 @@ public class ProducerTest {
 	}
 
 	public void sendData(String topic, String content, int index) throws InterruptedException, ExecutionException {
+		
 		ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, content);
-		producer.send(record);
+		long startTime = System.currentTimeMillis();
+		producer.send(record,new DemoCallBack(startTime,content));
 		System.out.println("[" + DateUtils.getCurrDateTimeStr() + "]-----send:" + index + ",topic:" + topic);
 	}
 
@@ -489,5 +498,29 @@ public class ProducerTest {
 		txt.setAttribute("ysMoney", "55.2");
 		String content = JsonUtil.toJson(txt.getAttributes());
 		return content;
+	}
+	
+	class DemoCallBack implements Callback{
+	    private final long startTime;
+	    private final String content;
+
+	    public DemoCallBack(long startTime,String content) {
+	        this.startTime = startTime;
+	        this.content = content;
+
+	    }
+		@Override
+		public void onCompletion(RecordMetadata recordMetadata, Exception exception) {
+			// TODO Auto-generated method stub
+			  if (recordMetadata != null) {
+
+		            long elapsedTime = System.currentTimeMillis() - startTime;
+		            System.out.println("--------------->>消息发送完成内容："+ content + " ---->>send to partition("
+		                    + recordMetadata.partition() + ")," + "offset(" + recordMetadata.offset() + ") 耗时：" + elapsedTime);
+		        } else {
+		            exception.printStackTrace();
+		        }
+		}
+		
 	}
 }
