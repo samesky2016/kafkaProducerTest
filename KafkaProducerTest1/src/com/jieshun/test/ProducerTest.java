@@ -47,6 +47,7 @@ public class ProducerTest {
 	private boolean isTopic;
 	private Combo textTopic;
 	private String content;
+	public static StringBuffer tips;
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
 
 	/**
@@ -182,6 +183,7 @@ public class ProducerTest {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// 参数初始化,解决线程安全问题
+				tips=new StringBuffer("");
 				bootstrapSeverStr = bootstrap.getText();
 				parkCodeStr = parkCode.getText();
 				sendParkInfoStr = sendParkInfo.getText();
@@ -203,9 +205,28 @@ public class ProducerTest {
 						process();
 					}
 				}.start();
-
+				
+				if(isTopic){
 				// btnNewButton.setEnabled(false);
-
+				for(int i=1;i<=100;i++){
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					if(!"".equals(tips.toString()))
+					{
+						textContent.setText(tips.toString());
+						break;
+					}
+				}
+				if("".equals(tips.toString()))
+				{
+					textContent.setText("10秒未获取到返回,请到kafka中检测消费数据");
+				}
+			}
 			}
 		});
 		btnNewButton.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.BOLD));
@@ -246,6 +267,7 @@ public class ProducerTest {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				tips=new StringBuffer("");
 				textContent.setText("");
 			}
 		});
@@ -276,7 +298,7 @@ public class ProducerTest {
 			if (isTopic) {
 				sendData(topic, content, 1);
 			} else {
-
+				
 				if ("true".equals(sendParkInfoStr)) {
 					sendData("mb.park.info", getParkInfo("mb.park.info"), 1);
 					System.out.println("----send mb.park.info over  !");
@@ -373,6 +395,7 @@ public class ProducerTest {
 		ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, content);
 		long startTime = System.currentTimeMillis();
 		producer.send(record,new DemoCallBack(startTime,content));
+		//tips.append("[" + DateUtils.getCurrDateTimeStr() + "]------->>send:" + index + ",topic:" + topic);
 		System.out.println("[" + DateUtils.getCurrDateTimeStr() + "]-----send:" + index + ",topic:" + topic);
 	}
 
@@ -515,9 +538,15 @@ public class ProducerTest {
 			  if (recordMetadata != null) {
 
 		            long elapsedTime = System.currentTimeMillis() - startTime;
-		            System.out.println("--------------->>消息发送完成内容："+ content + " ---->>send to partition("
-		                    + recordMetadata.partition() + ")," + "offset(" + recordMetadata.offset() + ") 耗时：" + elapsedTime);
-		        } else {
+//		            System.out.println("--------------->>消息发送完成内容："+ content + " ---->>send to partition("
+//		                    + recordMetadata.partition() + ")," + "offset(" + recordMetadata.offset() + ") 耗时：" + elapsedTime);
+		            tips.append("\n").append("[" + DateUtils.getCurrDateTimeStr() + "]").append("------->>消息发送完成内容："+ content + "  send to partition("
+		                    + recordMetadata.partition() + ")," + "offset(" + recordMetadata.offset() + ") 耗时：" + elapsedTime+"\n");
+		            if(tips.length()>5000){
+		            	tips=new StringBuffer("");
+		            }
+			  } else {
+				  	tips.append("[" + DateUtils.getCurrDateTimeStr() + "]").append("------->>发送失败"+exception.getMessage()+exception.getStackTrace()).append("\n");
 		            exception.printStackTrace();
 		        }
 		}

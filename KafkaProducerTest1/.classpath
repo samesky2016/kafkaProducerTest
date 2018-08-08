@@ -15,7 +15,7 @@
 	<classpathentry kind="lib" path="D:/eclipse-jee-mars-1-win32-x86_64/eclipse/plugins/com.ibm.icu_54.1.1.v201501272100.jar" sourcepath="D:/eclipse-jee-mars-1-win32-x86_64/eclipse/plugins/com.ibm.icu_54.1.1.v201501272100.jar"/>
 	<classpathentry kind="lib" path="D:/eclipse-jee-mars-1-win32-x86_64/eclipse/plugins/org.eclipse.ui.forms_3.6.200.v20150506-2029.jar" sourcepath="D:/eclipse-jee-mars-1-win32-x86_64/eclipse/plugins/org.eclipse.ui.forms_3.6.200.v20150506-2029.jar"/>
 	<classpathentry kind="lib" path="lib/fastjson-1.2.3.jar"/>
-	<classpathentry kind="lib" path="lib/kafka-clients-0.11.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/kafka-clients-0.11.0.1.jar" sourcepath="C:/Users/Administrator/.m2/repository/org/apache/kafka/kafka-clients/0.11.0.1/kafka-clients-0.11.0.1-sources.jar"/>
 	<classpathentry kind="lib" path="lib/org.slf4j.api_1.7.2.v20121108-1250.jar"/>
 	<classpathentry kind="lib" path="lib/com.fasterxml.jackson.annotations.jar"/>
 	<classpathentry kind="lib" path="lib/com.fasterxml.jackson.core.jar"/>
