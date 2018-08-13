@@ -753,5 +753,16 @@ public class StringUtil
     }
     return str.toString();
   }
-
+  
+//  获取0到num-1之间的随机数
+  public static int getRandomNum1(int num)
+  {
+    return new Random().nextInt(num) ;
+  }
+  
+  public static void main(String[] args) {
+	  for(int i=0;i<10;i++){
+		  System.out.println(getRandomNum1(2));
+	  }
+  }
 }

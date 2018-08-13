@@ -49,6 +49,7 @@ public class ProducerTest {
 	private String content;
 	public static StringBuffer tips;
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
+	private Text resultText;
 
 	/**
 	 * Launch the application.
@@ -85,85 +86,85 @@ public class ProducerTest {
 	protected void createContents() {
 		shlKafkaproducer = new Shell();
 		shlKafkaproducer.setImage(SWTResourceManager.getImage("image/producer.ico"));
-		shlKafkaproducer.setSize(704, 601);
+		shlKafkaproducer.setSize(806, 601);
 		shlKafkaproducer.setText("KafKaProducer");
 
 		Label lblTopic = new Label(shlKafkaproducer, SWT.NONE);
 		lblTopic.setFont(SWTResourceManager.getFont("微软雅黑", 11, SWT.NORMAL));
-		lblTopic.setBounds(86, 95, 46, 23);
+		lblTopic.setBounds(109, 95, 46, 23);
 		lblTopic.setText("Topic:");
 
 		Label lblBootstrapservers = new Label(shlKafkaproducer, SWT.NONE);
 		lblBootstrapservers.setFont(SWTResourceManager.getFont("微软雅黑", 11, SWT.NORMAL));
-		lblBootstrapservers.setBounds(2, 52, 135, 23);
+		lblBootstrapservers.setBounds(25, 52, 135, 23);
 		lblBootstrapservers.setText("bootstrap.servers:");
 
 		Text bootstrap = new Text(shlKafkaproducer, SWT.BORDER);
 		bootstrap.setText("119.23.42.209:9092");
-		bootstrap.setBounds(138, 52, 168, 23);
+		bootstrap.setBounds(161, 52, 168, 23);
 
 		Label parkCodeLabel = new Label(shlKafkaproducer, SWT.NONE);
 		parkCodeLabel.setFont(SWTResourceManager.getFont("微软雅黑", 11, SWT.NORMAL));
-		parkCodeLabel.setBounds(55, 142, 83, 23);
+		parkCodeLabel.setBounds(78, 142, 83, 23);
 		parkCodeLabel.setText("park.code:");
 
 		Text parkCode = new Text(shlKafkaproducer, SWT.BORDER);
 		parkCode.setText("Test123");
-		parkCode.setBounds(138, 142, 168, 23);
+		parkCode.setBounds(161, 142, 168, 23);
 
 		Label lblSendparkinfo = new Label(shlKafkaproducer, SWT.NONE);
 		lblSendparkinfo.setFont(SWTResourceManager.getFont("微软雅黑", 11, SWT.NORMAL));
-		lblSendparkinfo.setBounds(345, 52, 114, 23);
+		lblSendparkinfo.setBounds(465, 52, 114, 23);
 		lblSendparkinfo.setText("send.park.info:");
 
 		Combo sendParkInfo = new Combo(shlKafkaproducer, SWT.NONE);
 		sendParkInfo.setItems(new String[] { "true", "false" });
-		sendParkInfo.setBounds(465, 52, 126, 25);
+		sendParkInfo.setBounds(585, 52, 126, 25);
 		sendParkInfo.setText("false");
 
 		Label lblSendparkin = new Label(shlKafkaproducer, SWT.NONE);
 		lblSendparkin.setText("send.park.in:");
 		lblSendparkin.setFont(SWTResourceManager.getFont("微软雅黑", 11, SWT.NORMAL));
-		lblSendparkin.setBounds(358, 95, 97, 23);
+		lblSendparkin.setBounds(478, 95, 97, 23);
 
 		Label lblSendparkout = new Label(shlKafkaproducer, SWT.NONE);
 		lblSendparkout.setText("send.park.out:");
 		lblSendparkout.setFont(SWTResourceManager.getFont("微软雅黑", 11, SWT.NORMAL));
-		lblSendparkout.setBounds(345, 124, 114, 23);
+		lblSendparkout.setBounds(465, 124, 114, 23);
 
 		Combo sendParkIn = new Combo(shlKafkaproducer, SWT.NONE);
 		sendParkIn.setItems(new String[] { "true", "false" });
-		sendParkIn.setBounds(462, 95, 130, 25);
+		sendParkIn.setBounds(582, 95, 130, 25);
 		sendParkIn.setText("false");
 
 		Combo sendParkOut = new Combo(shlKafkaproducer, SWT.NONE);
 		sendParkOut.setItems(new String[] { "true", "false" });
-		sendParkOut.setBounds(462, 126, 130, 25);
+		sendParkOut.setBounds(582, 126, 130, 25);
 		sendParkOut.setText("false");
 		Label countLabel = new Label(shlKafkaproducer, SWT.NONE);
 		countLabel.setFont(SWTResourceManager.getFont("微软雅黑", 11, SWT.NORMAL));
-		countLabel.setBounds(7, 185, 130, 23);
+		countLabel.setBounds(30, 185, 130, 23);
 		countLabel.setText("send.total.count:");
 
 		Combo parkOrderCom = new Combo(shlKafkaproducer, SWT.NONE);
 		parkOrderCom.setItems(new String[] { "true", "false" });
-		parkOrderCom.setBounds(462, 157, 130, 25);
+		parkOrderCom.setBounds(582, 157, 130, 25);
 		formToolkit.adapt(parkOrderCom);
 		formToolkit.paintBordersFor(parkOrderCom);
 		parkOrderCom.setText("false");
 
 		Text sendCount = new Text(shlKafkaproducer, SWT.BORDER);
 		sendCount.setText("1");
-		sendCount.setBounds(138, 185, 168, 23);
+		sendCount.setBounds(161, 185, 168, 23);
 
 		Label lblSendwait = new Label(shlKafkaproducer, SWT.NONE);
 		lblSendwait.setText("send.wait:");
 		lblSendwait.setFont(SWTResourceManager.getFont("微软雅黑", 11, SWT.NORMAL));
-		lblSendwait.setBounds(381, 185, 78, 23);
+		lblSendwait.setBounds(501, 185, 78, 23);
 
 		Combo sendWait = new Combo(shlKafkaproducer, SWT.NONE);
 		sendWait.setItems(new String[] { "true", "false" });
-		sendWait.setBounds(462, 185, 130, 25);
+		sendWait.setBounds(582, 185, 130, 25);
 		sendWait.setText("false");
 		Button btntopic = new Button(shlKafkaproducer, SWT.RADIO);
 		btntopic.setSelection(true);
@@ -174,9 +175,9 @@ public class ProducerTest {
 		btnRadioButton.setBounds(343, 10, 97, 23);
 		btnRadioButton.setText("性能测试Topic");
 
-		textContent = new Text(shlKafkaproducer, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
+		textContent = new Text(shlKafkaproducer, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CANCEL | SWT.MULTI);
 		textContent.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		textContent.setBounds(25, 260, 614, 293);
+		textContent.setBounds(25, 260, 340, 266);
 
 		Button btnNewButton = new Button(shlKafkaproducer, SWT.NONE);
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
@@ -218,13 +219,13 @@ public class ProducerTest {
 					
 					if(!"".equals(tips.toString()))
 					{
-						textContent.setText(tips.toString());
+						resultText.setText(tips.toString());
 						break;
 					}
 				}
 				if("".equals(tips.toString()))
 				{
-					textContent.setText("10秒未获取到返回,请到kafka中检测消费数据");
+					resultText.setText("10秒未获取到返回,请到kafka中检测消费数据");
 				}
 			}
 			}
@@ -241,7 +242,7 @@ public class ProducerTest {
 		textTopic = new Combo(shlKafkaproducer, SWT.NONE);
 		textTopic.setItems(
 				new String[] {"mb.park.info", "mb.park.in", "mb.park.out", "mb.park.order", "mb.park.space", "msg.tel","msg.wx","msg.zfb","msg.app"});
-		textTopic.setBounds(138, 95, 168, 25);
+		textTopic.setBounds(161, 95, 168, 25);
 		formToolkit.adapt(textTopic);
 		formToolkit.paintBordersFor(textTopic);
 		textTopic.setText("test");
@@ -249,7 +250,7 @@ public class ProducerTest {
 		Label park_order_label = new Label(shlKafkaproducer, SWT.NONE);
 		park_order_label.setText("send.park.order:");
 		park_order_label.setFont(SWTResourceManager.getFont("微软雅黑", 11, SWT.NORMAL));
-		park_order_label.setBounds(332, 157, 126, 23);
+		park_order_label.setBounds(452, 157, 126, 23);
 		formToolkit.adapt(park_order_label, true, true);
 		
 		Button btnjson = new Button(shlKafkaproducer, SWT.NONE);
@@ -267,13 +268,37 @@ public class ProducerTest {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				tips=new StringBuffer("");
+				
 				textContent.setText("");
 			}
 		});
 		button.setBounds(252, 227, 80, 27);
 		formToolkit.adapt(button, true, true);
 		button.setText("清除数据");
+		
+		resultText = new Text(shlKafkaproducer, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CANCEL | SWT.MULTI);
+		resultText.setBackground(SWTResourceManager.getColor(SWT.COLOR_INFO_BACKGROUND));
+		resultText.setBounds(403, 260, 368, 266);
+		formToolkit.adapt(resultText, true, true);
+		
+		Label label_1 = new Label(shlKafkaproducer, SWT.NONE);
+		label_1.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_FOREGROUND));
+		label_1.setText("返回结果展示区：");
+		label_1.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.BOLD));
+		label_1.setBounds(403, 230, 114, 23);
+		formToolkit.adapt(label_1, true, true);
+		
+		Button clearResult = new Button(shlKafkaproducer, SWT.NONE);
+		clearResult.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				tips=new StringBuffer("");
+				resultText.setText("");
+			}
+		});
+		clearResult.setText("清除返回数据");
+		clearResult.setBounds(570, 227, 84, 27);
+		formToolkit.adapt(clearResult, true, true);
 		btnNewButton.forceFocus();
 
 	}
@@ -504,8 +529,8 @@ public class ProducerTest {
 		txt.setAttribute("parkCode", parkCodeStr);
 		txt.setAttribute("parkName", "测试");
 		txt.setAttribute("carNumber", FileUtil.getCarNumber());
-		txt.setAttribute("freeMoney", "10.2");
-		txt.setAttribute("hgMoney", "6.2");
+		txt.setAttribute("freeMoney", "0");
+		txt.setAttribute("hgMoney", "0");
 		txt.setAttribute("idno", "Ab" + StringUtil.get4RandomNum());
 		txt.setAttribute("inEquipCode", "A" + StringUtil.getRandomNum(8));
 		txt.setAttribute("inEquipName", "设备" + StringUtil.getRandomNum(8));
@@ -516,9 +541,11 @@ public class ProducerTest {
 		txt.setAttribute("outOperator", "测试");
 		txt.setAttribute("outTime", DateUtils.getCurrDateTimeStr());
 		txt.setAttribute("payTypeName", "现金");
-		txt.setAttribute("ssMoney", "5454.9");
-		txt.setAttribute("yhMoney", "545.4");
-		txt.setAttribute("ysMoney", "55.2");
+		txt.setAttribute("ssMoney", "10.0");
+		txt.setAttribute("yhMoney", "0");
+		txt.setAttribute("ysMoney", "10.0");
+		txt.setAttribute("dkTag", StringUtil.getRandomNum1(1));
+		txt.setAttribute("withHoldMoney", "0");
 		String content = JsonUtil.toJson(txt.getAttributes());
 		return content;
 	}
