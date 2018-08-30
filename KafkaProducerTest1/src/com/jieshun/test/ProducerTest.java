@@ -100,7 +100,7 @@ public class ProducerTest {
 		lblBootstrapservers.setText("bootstrap.servers:");
 
 		Text bootstrap = new Text(shlKafkaproducer, SWT.BORDER);
-		bootstrap.setText("119.23.42.209:9092");
+		bootstrap.setText("10.10.201.6:9092");
 		bootstrap.setBounds(161, 52, 168, 23);
 
 		Label parkCodeLabel = new Label(shlKafkaproducer, SWT.NONE);
